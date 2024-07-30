@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint --ignore-path .gitignore .",
-    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|)\""
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|)\"",
+    "coverage": "jest --coverage"
   },
   "keywords": [],
   "author": "",
