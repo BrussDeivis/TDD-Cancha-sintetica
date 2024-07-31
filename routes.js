@@ -98,9 +98,9 @@ router.post('/api/calendario/cancha/:id/reservar', (req, res) => {
 
 
 //reservar cancha
-router.post('/calendario/cancha/15/reservar', (req, res) => {
+router.post('/calendario/cancha/:id/reservarCancha', (req, res) => {
   const { id } = req.params;
-  const {nombreEncuentro,perfilReservador,cantidadHoras,montoAPagar,dni,numeroCelular} = req.body;
+  const {nombreEncuentro,perfilReservador,cantidadHoras,montoAPagar,dni,numeroCelular, estado} = req.body;
   
   const nuevaReserva = {
     canchaID: 15,
@@ -110,7 +110,8 @@ router.post('/calendario/cancha/15/reservar', (req, res) => {
     numeroCelular,
     cantidadHoras,
     montoAPagar,
-    _id: 'abcd',
+    estado,
+    _id: `reserva-${reservas.length + 1}`
   };
 
   reservas.push(nuevaReserva);
@@ -138,6 +139,54 @@ router.get('/cancha/:id', (req, res) => {
   } else {
     res.status(404).json({ error: 'Cancha no encontrada' });
   }
+});
+
+
+router.put('/calendario/cancha/:id/ReporgramarReserva', (req, res) => {
+  const { id } = req.params;
+  const { nuevaHora, nuevaCanchaID, accion } = req.body; // accion puede ser 'reprogramar' o 'cancelar'
+  
+  const reserva = reservas.find(r => r._id === id)
+  
+  if (!reserva) {
+    return res.status(404).json({ error: 'Reserva no encontrada' });
+  }
+
+  if (accion === 'reprogramar') {
+    // Validar que la nueva hora y cancha no estén ocupadas
+    const conflicto = reservas.find(r => r.hora === nuevaHora && r.canchaID === nuevaCanchaID);
+    
+    if (conflicto) {
+      return res.status(400).json({ error: 'La cancha ya está reservada en esa hora' });
+    }
+    
+    // Actualizar reserva con nueva hora y/o cancha
+    reserva.cantidadHoras = nuevaHora || reserva.hora;
+    reserva.canchaID = nuevaCanchaID || reserva.canchaID;
+    
+    // Calcular costo adicional (ejemplo simple)
+    reserva.montoAPagar = 20; // Puedes cambiar la lógica de costo adicional según sea necesario
+    
+  } else if (accion === 'cancelar') {
+    // Eliminar la reserva del array
+    reservas = reservas.filter(r => r._id !== id);
+  }
+  
+  res.status(200).json(reserva);
+});
+
+router.put('/calendario/cancha/:id/cancelarReserva', (req, res) => {
+  const { id } = req.params;
+  const {accion } = req.body; // accion puede ser 'reprogramar' o 'cancelar'
+  const reserva = reservas.find(r => r._id === id)
+  if (!reserva) {
+    return res.status(404).json({ error: 'Reserva no encontrada' });
+  }
+  if (accion === 'cancelar') {
+    // Eliminar la reserva del array
+    reserva.estado = "cancelado";
+  }
+  res.status(200).json(reserva);
 });
 
 

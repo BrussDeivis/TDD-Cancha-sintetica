@@ -23,7 +23,7 @@ describe('Calendario de la Cancha', () => {
     test('debe reservar una cancha', async () => {
       const reservaCancha = Builder.reserva();
       const response = await request(app)
-        .post('/calendario/cancha/15/reservar')
+        .post('/calendario/cancha/15/reservarCancha')
         .send(reservaCancha)
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
@@ -37,6 +37,7 @@ describe('Calendario de la Cancha', () => {
         numeroCelular: reservaCancha.numeroCelular,
         cantidadHoras: reservaCancha.cantidadHoras,
         montoAPagar: reservaCancha.montoAPagar,
+        estado : reservaCancha.estado,
         _id: expect.any(String),
       });
     });
@@ -74,6 +75,66 @@ describe('Calendario de la Cancha', () => {
     });
     });
 
+
+    test('debe reprogramar una reserva', async () => {
+      const reservaCancha = Builder.reserva();
+    
+      // Crear una reserva inicial
+      const response1 = await request(app)
+        .post('/calendario/cancha/15/reservarCancha')
+        .send(reservaCancha)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201);
+    
+      const reservaId = response1.body._id;
+    
+      // Reprogramar la reserva
+      const response2 = await request(app)
+        .put(`/calendario/cancha/${reservaId}/ReporgramarReserva`)
+        .send({ nuevaHora: 200, nuevaCanchaID: 9, accion: 'reprogramar' })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200);
+    
+      expect(response2.body).toEqual({
+        ...response1.body,
+        canchaID: 9,
+        cantidadHoras: 200,
+        montoAPagar: 20,
+     // Verifica el costo adicional si es necesario
+      });
+    });
+
+
+    test('debe cancelar una reserva', async () => {
+      const reservaCancha = Builder.reserva();
+    
+      // Crear una reserva inicial
+      const response1 = await request(app)
+        .post('/calendario/cancha/16/reservarCancha')
+        .send(reservaCancha)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201);
+    
+      const reservaId = response1.body._id;
+    
+      // Cancelar la reserva
+      const response2 = await request(app)
+        .put(`/calendario/cancha/${reservaId}/cancelarReserva`)
+        .send({ accion: 'cancelar' })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200);
+    
+      expect(response2.body).toEqual({
+        ...response1.body,
+        estado : "cancelado",
+      });
+      
+    });
+
   })
   
 
@@ -109,4 +170,7 @@ describe('Calendario de la Cancha', () => {
   
         expect(response.body).toEqual({ error: 'Cancha no encontrada' });
     });
+
+
+
   });

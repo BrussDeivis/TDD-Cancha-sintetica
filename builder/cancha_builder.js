@@ -15,6 +15,7 @@ module.exports.Builder = {
     montoAPagar = 50, // Puedes calcular esto en función de la cantidadHoras y costo por hora
     dni = '12345678',
     numeroCelular = '555-1234',
+    estado = 'reservado',
   } = {}) => ({
     canchaID,
     nombreEncuentro,
@@ -23,6 +24,7 @@ module.exports.Builder = {
     montoAPagar,
     dni,
     numeroCelular,
+    estado,
   }),
   }
   
