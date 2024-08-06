@@ -152,25 +152,22 @@ router.put('/calendario/cancha/:id/ReporgramarReserva', (req, res) => {
     return res.status(404).json({ error: 'Reserva no encontrada' });
   }
 
-  if (accion === 'reprogramar') {
+  
     // Validar que la nueva hora y cancha no estén ocupadas
-    const conflicto = reservas.find(r => r.hora === nuevaHora && r.canchaID === nuevaCanchaID);
+    const conflicto = reservas.find(r => r.cantidadHoras === nuevaHora && r.canchaID === nuevaCanchaID);
     
     if (conflicto) {
       return res.status(400).json({ error: 'La cancha ya está reservada en esa hora' });
     }
     
     // Actualizar reserva con nueva hora y/o cancha
-    reserva.cantidadHoras = nuevaHora || reserva.hora;
-    reserva.canchaID = nuevaCanchaID || reserva.canchaID;
+    reserva.cantidadHoras = nuevaHora 
+    reserva.canchaID = nuevaCanchaID 
     
     // Calcular costo adicional (ejemplo simple)
     reserva.montoAPagar = 20; // Puedes cambiar la lógica de costo adicional según sea necesario
     
-  } else if (accion === 'cancelar') {
-    // Eliminar la reserva del array
-    reservas = reservas.filter(r => r._id !== id);
-  }
+  
   
   res.status(200).json(reserva);
 });
@@ -182,10 +179,10 @@ router.put('/calendario/cancha/:id/cancelarReserva', (req, res) => {
   if (!reserva) {
     return res.status(404).json({ error: 'Reserva no encontrada' });
   }
-  if (accion === 'cancelar') {
+  
     // Eliminar la reserva del array
     reserva.estado = "cancelado";
-  }
+ 
   res.status(200).json(reserva);
 });
 

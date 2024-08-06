@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1721846114938" clover="3.2.0">
-  <project timestamp="1721846114938" name="All files">
-    <metrics statements="49" coveredstatements="48" conditionals="15" coveredconditionals="14" methods="10" coveredmethods="8" elements="74" coveredelements="70" complexity="0" loc="49" ncloc="49" packages="3" files="6" classes="6"/>
-    <package name="Pruebas de Software">
-      <metrics statements="44" coveredstatements="43" conditionals="6" coveredconditionals="5" methods="7" coveredmethods="6"/>
-      <file name="app.js" path="/home/bruss/Documentos/Pruebas de Software/app.js">
-        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="3" type="stmt"/>
-        <line num="3" count="3" type="stmt"/>
-        <line num="5" count="3" type="stmt"/>
-        <line num="7" count="3" type="stmt"/>
-        <line num="9" count="3" type="stmt"/>
-        <line num="11" count="3" type="stmt"/>
+<coverage generated="1722631971136" clover="3.2.0">
+  <project timestamp="1722631971136" name="All files">
+    <metrics statements="78" coveredstatements="77" conditionals="32" coveredconditionals="31" methods="21" coveredmethods="20" elements="131" coveredelements="128" complexity="0" loc="78" ncloc="78" packages="2" files="4" classes="4"/>
+    <package name="TDD-Cancha-sintetica">
+      <metrics statements="75" coveredstatements="74" conditionals="18" coveredconditionals="17" methods="19" coveredmethods="18"/>
+      <file name="pruebasParametrizadas.js" path="/home/bruss/Documentos/Pruebas de Software/TDD-Cancha-sintetica/pruebasParametrizadas.js">
+        <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="4"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="16" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="19" count="4" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
       </file>
-      <file name="routes.js" path="/home/bruss/Documentos/Pruebas de Software/routes.js">
-        <metrics statements="33" coveredstatements="33" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="6"/>
+      <file name="routes.js" path="/home/bruss/Documentos/Pruebas de Software/TDD-Cancha-sintetica/routes.js">
+        <metrics statements="63" coveredstatements="63" conditionals="14" coveredconditionals="14" methods="14" coveredmethods="14"/>
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
         <line num="3" count="3" type="stmt"/>
@@ -32,24 +33,54 @@
         <line num="38" count="1" type="stmt"/>
         <line num="39" count="1" type="stmt"/>
         <line num="49" count="1" type="stmt"/>
-        <line num="52" count="3" type="stmt"/>
-        <line num="53" count="1" type="stmt"/>
-        <line num="54" count="1" type="stmt"/>
-        <line num="56" count="1" type="stmt"/>
-        <line num="64" count="1" type="stmt"/>
-        <line num="65" count="1" type="stmt"/>
-        <line num="70" count="3" type="stmt"/>
-        <line num="71" count="2" type="stmt"/>
-        <line num="72" count="2" type="stmt"/>
-        <line num="75" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="76" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="77" count="1" type="stmt"/>
-        <line num="85" count="1" type="stmt"/>
-        <line num="93" count="1" type="stmt"/>
-        <line num="94" count="1" type="stmt"/>
-        <line num="98" count="3" type="stmt"/>
+        <line num="72" count="3" type="stmt"/>
+        <line num="73" count="2" type="stmt"/>
+        <line num="74" count="2" type="stmt"/>
+        <line num="77" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="78" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="87" count="1" type="stmt"/>
+        <line num="95" count="1" type="stmt"/>
+        <line num="96" count="1" type="stmt"/>
+        <line num="101" count="3" type="stmt"/>
+        <line num="102" count="6" type="stmt"/>
+        <line num="103" count="6" type="stmt"/>
+        <line num="105" count="6" type="stmt"/>
+        <line num="117" count="6" type="stmt"/>
+        <line num="118" count="6" type="stmt"/>
+        <line num="124" count="3" type="stmt"/>
+        <line num="129" count="3" type="stmt"/>
+        <line num="130" count="1" type="stmt"/>
+        <line num="133" count="3" type="stmt"/>
+        <line num="134" count="2" type="stmt"/>
+        <line num="135" count="3" type="stmt"/>
+        <line num="137" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="138" count="1" type="stmt"/>
+        <line num="140" count="1" type="stmt"/>
+        <line num="145" count="3" type="stmt"/>
+        <line num="146" count="3" type="stmt"/>
+        <line num="147" count="3" type="stmt"/>
+        <line num="149" count="12" type="stmt"/>
+        <line num="151" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="152" count="1" type="stmt"/>
+        <line num="157" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="159" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="160" count="1" type="stmt"/>
+        <line num="164" count="1" type="stmt"/>
+        <line num="165" count="1" type="stmt"/>
+        <line num="168" count="1" type="stmt"/>
+        <line num="172" count="1" type="stmt"/>
+        <line num="175" count="3" type="stmt"/>
+        <line num="176" count="2" type="stmt"/>
+        <line num="177" count="2" type="stmt"/>
+        <line num="178" count="13" type="stmt"/>
+        <line num="179" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="180" count="1" type="stmt"/>
+        <line num="184" count="1" type="stmt"/>
+        <line num="186" count="1" type="stmt"/>
+        <line num="190" count="3" type="stmt"/>
       </file>
-      <file name="server.js" path="/home/bruss/Documentos/Pruebas de Software/server.js">
+      <file name="server.js" path="/home/bruss/Documentos/Pruebas de Software/TDD-Cancha-sintetica/server.js">
         <metrics statements="5" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="0"/>
         <line num="1" count="3" type="stmt"/>
         <line num="3" count="3" type="stmt"/>
@@ -58,24 +89,13 @@
         <line num="9" count="3" type="stmt"/>
       </file>
     </package>
-    <package name="Pruebas de Software.builder">
-      <metrics statements="4" coveredstatements="4" conditionals="9" coveredconditionals="9" methods="2" coveredmethods="2"/>
-      <file name="cancha_builder.js" path="/home/bruss/Documentos/Pruebas de Software/builder/cancha_builder.js">
-        <metrics statements="2" coveredstatements="2" conditionals="5" coveredconditionals="5" methods="1" coveredmethods="1"/>
+    <package name="TDD-Cancha-sintetica.builder">
+      <metrics statements="3" coveredstatements="3" conditionals="14" coveredconditionals="14" methods="2" coveredmethods="2"/>
+      <file name="cancha_builder.js" path="/home/bruss/Documentos/Pruebas de Software/TDD-Cancha-sintetica/builder/cancha_builder.js">
+        <metrics statements="3" coveredstatements="3" conditionals="14" coveredconditionals="14" methods="2" coveredmethods="2"/>
         <line num="2" count="1" type="stmt"/>
-        <line num="3" count="2" type="cond" truecount="5" falsecount="0"/>
-      </file>
-      <file name="product-builder.js" path="/home/bruss/Documentos/Pruebas de Software/builder/product-builder.js">
-        <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
-        <line num="2" count="2" type="stmt"/>
-        <line num="3" count="2" type="cond" truecount="4" falsecount="0"/>
-      </file>
-    </package>
-    <package name="Pruebas de Software.services">
-      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="product-services.js" path="/home/bruss/Documentos/Pruebas de Software/services/product-services.js">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="1" type="cond" truecount="5" falsecount="0"/>
+        <line num="19" count="6" type="stmt"/>
       </file>
     </package>
   </project>
