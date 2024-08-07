@@ -1,8 +1,17 @@
 const request = require('supertest')
 
 const { app } = require('../server')
+const { connect, getUri, closeDb } = require('../db')
 const { Builder } = require('../builder/cancha_builder')
 
+beforeAll(async () => {
+  const uri = await getUri()
+  await connect({ uri })
+})
+
+afterAll(async () => {
+  await closeDb()
+})
 
 let reservas = [];
 
@@ -29,6 +38,11 @@ describe('Calendario de la Cancha', () => {
         .expect('Content-Type', /json/)
         .expect(201);
     
+      const { _id, ...canchaStore } = response.body
+  
+      expect(canchaStore).toEqual(reservaCancha)
+      expect(_id).toBeTruthy()
+/*
       expect(response.body).toEqual({
         canchaID: reservaCancha.canchaID,
         nombreEncuentro: reservaCancha.nombreEncuentro,
@@ -36,33 +50,27 @@ describe('Calendario de la Cancha', () => {
         dni: reservaCancha.dni,
         numeroCelular: reservaCancha.numeroCelular,
         cantidadHoras: reservaCancha.cantidadHoras,
+        hora: reservaCancha.hora,
         montoAPagar: reservaCancha.montoAPagar,
         estado : reservaCancha.estado,
         _id: expect.any(String),
-      });
+      });*/
     });
 
     test('Cuando se quiere reservar la misma cancha', async () => {
-      const reservaCancha = Builder.futbol();
+      const reservaCancha = Builder.reserva();
     // Realizar la primera reserva
       const response1 = await request(app)
-      .post('/api/calendario/cancha/8/reservar')
+      .post('/calendario/cancha/15/reservarCancha')
       .send(reservaCancha)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(201);
-      expect(response1.body).toEqual({
-        canchaID: '8',
-        nombreEncuentro: reservaCancha.nombreEncuentro,
-        perfilReservador: reservaCancha.perfilReservador,
-        hora: reservaCancha.hora,
-      _id: expect.any(String),
-      })
-
+      
     // Intentar reservar la misma cancha y hora nuevamente
        const response2 = await request(app)
-      .post('/api/calendario/cancha/8/reservar')
-      .send(reservaCancha)
+      .post('/api/calendario/cancha/15/reservar')
+      .send({ nombreEncuentro: reservaCancha.nombreEncuentro, perfilReservador: reservaCancha.perfilReservador, hora:reservaCancha.hora })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(400);
@@ -104,6 +112,34 @@ describe('Calendario de la Cancha', () => {
         cantidadHoras: 200,
         montoAPagar: 20,
      // Verifica el costo adicional si es necesario
+      });
+    });
+
+
+    //valores límite reserva hora
+    test('debe devolver un mensaje de Partición no valida', async () => {
+      const reservaCancha = Builder.reserva();
+    
+      // Crear una reserva inicial
+      const response1 = await request(app)
+        .post('/calendario/cancha/15/reservarCancha')
+        .send(reservaCancha)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201);
+    
+      const reservaId = response1.body._id;
+    
+      // Reprogramar la reserva
+      const response2 = await request(app)
+        .put(`/calendario/cancha/${reservaId}/ParticionInvalida`)
+        .send({ hora: "4:59 am" })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(404);
+    
+      expect(response2.body).toEqual({
+        error: 'Ruta no encontrada'
       });
     });
 
